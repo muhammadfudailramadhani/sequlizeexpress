@@ -11,12 +11,12 @@ const register = async (req, res) => {
       const users = await UserModel.create(body);
       console.log(users);
 
-      res.json({
+      res.status(200).json({
         status: "Success",
         msg: "Register Berhasil",
       });
     } catch (err) {
-      console.log(err);
+      
     }
   }
 

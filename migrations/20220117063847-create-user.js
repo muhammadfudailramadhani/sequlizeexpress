@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.ENUM('active', 'nonactive'),
         defaultValue: 'active'  
       },
-      jenis_kelamin: {
+      jenisKelamin: {
         type: Sequelize.ENUM('laki-laki', 'perempuan'),
         defaultValue: 'laki-laki'  
       },

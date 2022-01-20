@@ -1,25 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const UserModel = require("../models").user;
-const bcrypt = require('bcrypt');
+const { register } = require("../controller/AuthController");
+const validationMiddleware = require("../middleware/validationMiddleware");
+const { validationRegister } = require("../validators/authValidator");
+const {index} = require("../controller/UserController");
 
-router.get("/", (req, res) => {
-  res.json({ status: "ok" });
-});
-router.post("/register", async (req, res) => {
-  try {
-    let body = req.body;
-    body.password = await bcrypt.hashSync(body.password, 10);
-    const users = await UserModel.create(body);
-    console.log(users);
 
-    res.json({
-        status: "Success",
-        msg: "register ditambahkan"
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
+router.post("/register", validationRegister, validationMiddleware, register);
+router.get("/users", index);
+router.get("users/:id", index);
+
 
 module.exports = router;
